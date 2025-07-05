@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayansh's 4th Birthday 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .bg-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.5rem;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .invite-card {
+      background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+      padding: 3rem 2.5rem;
+      border-radius: 30px;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      text-align: center;
+      max-width: 650px;
+      width: 90%;
+      animation: cardEntrance 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: visible; /* Fixed issue to prevent clipping of floating animations */
+    }
+
+    .invite-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b, #eb4d4b, #6c5ce7);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      z-index: -1;
+      margin: -3px;
+      border-radius: 30px;
+    }
+
+    .main-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: titleGlow 2s ease-in-out infinite alternate;
+      text-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+    }
+
+    .age-highlight {
+      font-family: 'Baloo 2', cursive;
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff6b6b, #ff4757, #ff3838);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+      animation: scaleUpDown 2s ease-in-out infinite;
+      text-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+      color: #ff6b6b;
+    }
+
+    .sub-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #6c5ce7;
+      margin-bottom: 2.5rem;
+      animation: slideInFromLeft 1s ease-out 0.5s both;
+    }
+
+    .photo-container {
+      position: relative;
+      display: inline-block;
+      margin: 0.5rem 0 2rem 0;  /* Reduced space */
+    }
+
+    .photo {
+      width: 100%;
+      max-width: 350px; /* Increased size of the image */
+      height: auto;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 3px rgba(255, 107, 107, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: photoFloat 3s ease-in-out infinite;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+      animation: slideInFromRight 1s ease-out 0.7s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-item {
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      display: block;
+      text-align: center;
+      animation: fadeInUp 0.8s ease-out;
+      line-height: 1.4;
+    }
+
+    .location-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animations */
+    @keyframes cardEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes titleGlow {
+      0% { text-shadow: 0 2px 10px rgba(255, 107, 107, 0.3); }
+      100% { text-shadow: 0 2px 20px rgba(255, 107, 107, 0.6), 0 0 30px rgba(76, 205, 196, 0.3); }
+    }
+
+    @keyframes photoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .invite-card {
+        padding: 2rem 1.5rem;
+      }
+      
+      .main-title {
+        font-size: 2.5rem;
+      }
+      
+      .age-highlight {
+        font-size: 3rem;
+      }
+      
+      .sub-title {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .balloons {
+        font-size: 2.5rem;
+      }
+      
+      .main-title {
+        font-size: 2rem;
+      }
+      
+      .age-highlight {
+        font-size: 2.5rem;
+      }
+      
+      .info-box {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-stars">
+    <div class="star">✨</div>
+    <div class="star">⭐</div>
+    <div class="star">🌟</div>
+    <div class="star">💫</div>
+  </div>
+
+  <div class="container">
+    <div class="invite-card">
+      <h1 class="main-title">
+        Ayansh is Turning <span class="age-highlight">4</span>!
+      </h1>
+
+      <div class="photo-container">
+        <img src="ayansh-photo.jpg" alt="Birthday Boy Ayansh" class="photo" />
+      </div>
+
+      <h2 class="sub-title">You're Invited to the Most Magical Party Ever! 🌟</h2>
+
+      <div class="info-box">
+        <div class="info-item">
+          <strong>📅 Date:</strong> 7th July 2025
+        </div>
+        <div class="info-item">
+          <strong>🎂 Cake Cutting:</strong> 6:00 PM - 6:30 PM
+        </div>
+        <div class="info-item">
+          <strong>🍽️ Dinner:</strong> 7:00 PM Onwards
+        </div>
+        <div class="info-item">
+          <strong>🏠 Venue:</strong> 3 Bro's Buffet
+        </div>
+        <div class="info-item">
+          <strong>📍 Address:</strong> 3rd Floor, VK Towers, Suchitra Road<br>Above Neeru's, Kompally
+        </div>
+
+        <a href="https://maps.app.goo.gl/QJdqmTxrRPLMmQGFA" 
+           target="_blank" class="location-btn">
+          📍 Get Directions
+        </a>
+      </div>
+
+      <p class="footer-note">Come dressed in your brightest smiles and party spirit! 🎊</p>
+    </div>
+  </div>
+</body>
+</html>
